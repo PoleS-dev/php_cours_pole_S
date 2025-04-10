@@ -154,6 +154,8 @@ debug($result);
 $employe = $result->fetch(PDO::FETCH_ASSOC); // la méthode fetch() avec le paramètre PDO::FETCH_ASSOC permet de transformer l'objet $result en un ARRAY associatif dont les indices correspondent aux noms des champs (*) de la requête SQL
 var_dump($employe);
 debug($employe);
+echo "Je suis {$employe['prenom']} {$employe['nom']} du service {$employe['service']}.<br>";
+// Pourquoi ça marche ? Parce que les accolades isolent proprement l’expression $employe['prenom'] à l’intérieur d’une chaîne de caractères.
 echo "Je suis $employe[prenom] $employe[nom] du service $employe[service]. <br>"; // n'oubliez pas qu'un array écrit dans des quotes ou des guillemets perd ses quotes à son indice
 
 // Résumé des 4 étapes principales pour afficher Daniel Chevel :
@@ -161,7 +163,10 @@ echo "Je suis $employe[prenom] $employe[nom] du service $employe[service]. <br>"
 // 2- on fait la requête : on obtient un objet PDOStatement
 // 3- on fait un fetch sur cet objet pour le transformer 
 // 4- on affiche le résultat final 
-
+$rasul=$pdo->query("SELECT * FROM employes WHERE id= 85");
+$employe1= $rasul->fetch(PDO::FETCH_ASSOC); 
+var_dump($employe1);
+echo "coucou";
 //------
 // On peut aussi transformer l'objet PDOStatement $result selon les méthodes fetch suivantes :
 
@@ -352,10 +357,12 @@ echo '<h3> 11- L\'extension Mysqli </h3>';
 //---------------------------------------
 
 // Connexion à la BDD :
-$mysqli = new Mysqli('localhost', 'root', '', 'societe');
+$mysqli = new Mysqli('localhost', 'root', 'votre_mot_de_passe', 'societe');
 
 // exemple de requête :
 $resultat = $mysqli->query("SELECT * FROM employes");
+
+
 
 
 //---------------------- FIN DU FICHIER -------------------------
